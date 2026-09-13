@@ -1,0 +1,13 @@
+# Carpeta de compilación (se regenera con idf.py build)
+build/
+
+# Configuración generada localmente a partir de sdkconfig.defaults
+sdkconfig
+sdkconfig.old
+
+# Dependencias descargadas por el gestor de componentes de ESP-IDF
+managed_components/
+dependencies.lock
+
+# Configuración de VS Code específica de tu máquina
+.vscode/
