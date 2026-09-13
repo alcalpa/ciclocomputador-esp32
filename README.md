@@ -17,7 +17,7 @@ ciclocomputador/
     shared_state/             estado compartido protegido por mutex
     gps_task/                 UART + parser NMEA (minmea), vuelca a shared_state
     minmea/                   parser NMEA 0183 de terceros, copiado como componente local
-    sensors_task/             I2C (BME280 + RTC) + sensor de rueda (pendiente)
+    sensors_task/             I2C (BME280 + DS3231) + sensor de rueda por interrupcion
     ble_task/                 NimBLE: escaneo y sensores externos (pendiente)
     storage_task/             montaje de SD, log GPX, lectura de rutas (pendiente)
     display_task/
@@ -54,10 +54,14 @@ idf.py -p /dev/ttyUSB0 flash monitor
 ## Orden de implementacion sugerido
 
 1. `gps_task`: UART + parser NMEA con `minmea` (componente local en
-   `components/minmea/`), volcando a `shared_state_write_gps()`. Hecho,
-   pendiente de probar contra el modulo real.
-2. `sensors_task`: I2C con BME280, y despues el sensor de rueda por
-   interrupcion GPIO.
+   `components/minmea/`), volcando a `shared_state_write_gps()`. Al
+   arrancar configura el NEO-M8N por UBX (115200 baudios, 5 Hz, solo
+   RMC y GGA) y vuelca tambien la hora UTC. Hecho, pendiente de probar
+   contra el modulo real.
+2. `sensors_task`: I2C (`esp_driver_i2c`) con BME280 y DS3231, y sensor
+   de rueda por interrupcion GPIO. Hecho, pendiente de probar con
+   hardware; la circunferencia de rueda es una constante hasta que
+   exista la calibracion en NVS.
 3. `display_task`: primero `PANTALLA_DATOS` con datos reales del
    estado compartido (sin BLE ni mapa todavia).
 4. `storage_task`: montaje de SD y escritura de log GPX basico.

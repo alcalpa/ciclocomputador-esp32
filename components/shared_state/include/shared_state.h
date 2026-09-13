@@ -40,7 +40,8 @@ typedef struct {
     bool ble_cadencia_conectada;
     uint16_t cadencia_rpm;
 
-    /* Hora (RTC) */
+    /* Hora en UTC. La escribe el GPS mientras tiene fix y el RTC cuando
+     * no lo tiene. La conversion a hora local es cosa de la pantalla. */
     uint8_t hora;
     uint8_t minuto;
     uint8_t segundo;
