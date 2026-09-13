@@ -26,12 +26,15 @@ Compradas pensando ya en no tener que rehacer nada para V2.
 
 ### Buses y pines (definidos)
 
-- [ ] VSPI dedicado a pantalla: SCLK=18, MOSI=23, MISO=19, CS=5, DC=2, RST=4
-- [ ] HSPI dedicado a SD: SCLK=14, MOSI=13, MISO=12, CS=15
-- [ ] I2C compartido para BME280 + RTC: SDA=21, SCL=22
-- [ ] UART para GPS: RX=16, TX=17
-- [ ] ADC para lectura de batería: GPIO 34
-- [ ] GPIOs libres para los 5 botones (con pull-up interno)
+- [x] SPI2 dedicado a pantalla: SCLK=12, MOSI=11, MISO=13, CS=10, DC=14, RST=21
+- [x] SPI3 dedicado a SD: SCLK=39, MOSI=40, MISO=41, CS=42
+- [x] I2C compartido para BME280 + RTC: SDA=8, SCL=9
+- [x] UART para GPS: RX=16, TX=17
+- [x] Sensor de rueda: GPIO 4
+- [x] ADC para lectura de batería: GPIO 1 (ADC1_CH0)
+- [x] Botones: 5, 6, 7, 15, 18 (con pull-up interno)
+- [x] Buzzer: GPIO 47
+- Evitados: 0, 3, 45, 46 (strapping), 19, 20 (USB), 26-32 (flash), 33-38 (PSRAM octal)
 
 ---
 
