@@ -15,7 +15,8 @@ ciclocomputador/
   components/
     config/                   pins.h: unico sitio con numeros de pin
     shared_state/             estado compartido protegido por mutex
-    gps_task/                 UART + parser NMEA (pendiente)
+    gps_task/                 UART + parser NMEA (minmea), vuelca a shared_state
+    minmea/                   parser NMEA 0183 de terceros, copiado como componente local
     sensors_task/             I2C (BME280 + RTC) + sensor de rueda (pendiente)
     ble_task/                 NimBLE: escaneo y sensores externos (pendiente)
     storage_task/             montaje de SD, log GPX, lectura de rutas (pendiente)
@@ -52,8 +53,9 @@ idf.py -p /dev/ttyUSB0 flash monitor
 
 ## Orden de implementacion sugerido
 
-1. `gps_task`: UART + parser NMEA (libreria `minmea` o similar via
-   componente de terceros), volcando a `shared_state_write_gps()`.
+1. `gps_task`: UART + parser NMEA con `minmea` (componente local en
+   `components/minmea/`), volcando a `shared_state_write_gps()`. Hecho,
+   pendiente de probar contra el modulo real.
 2. `sensors_task`: I2C con BME280, y despues el sensor de rueda por
    interrupcion GPIO.
 3. `display_task`: primero `PANTALLA_DATOS` con datos reales del
